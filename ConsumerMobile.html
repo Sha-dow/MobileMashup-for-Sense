@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sales Overview">
+    <meta name="author" content="Hannu Ranta - Qlik Finland">
+
+    <title>Sales Overview</title>
+   
+    <link href="./Content/bootstrap.css" rel="stylesheet">
+    <link href="./Content/magnific-popup.css" rel="stylesheet">
+    <link href="./Content/creative.css" rel="stylesheet">
+ 
+    <link href="./Content/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="./Content/qlik-styles.css">
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand page-scroll" href="#" onclick="app.update();" data-toggle="collapse" data-target="#filters"><span class="glyphicon glyphicon-filter"></span></a>
+                <a class="navbar-brand page-scroll tablet-hidden" href="#"><span class="glyphicon glyphicon-user" data-toggle="collapse" data-target="#salesreps-main"></span></a>
+                <a class="navbar-brand page-scroll" onclick="app.toggleTableModal('open');" href="#"><span class="glyphicon glyphicon-equalizer"></span></a>
+                <img src="./Images/Nav-icon.png" class="navbar-toggle collapsed tablet-hidden" data-toggle="collapse" data-target="#pie-menu">
+                
+                <img class="header-img phone-hidden" src="./Images/Qlik_logo.png">
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse collapse" id="pie-menu">
+                <ul class="nav navbar-nav navbar-left tablet-hidden">
+                    <li>
+                        <a class="page-scroll" href="#section_1">Sales Performance</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#section_2">Orders and Customers</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="filters collapse" id="filters">
+                <h3>Filters</h3>
+                <ul class="nav navbar-nav navbar-left tablet-hidden">
+                    <li><a onclick="app.clearSelections();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear Selections</a></li>
+                </ul>
+                <div id="FB" class="graph-div-container-fb phone-hidden"></div>
+                <div id ="FF01" class="graph-div-container-filters"></div>
+                <ul class="nav navbar-nav phone-hidden">
+                    <li><a onclick="app.clearSelections();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear Selections</a></li>
+                </ul>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="salesreps-main">
+                <h3>Sales Reps</h3>
+                <ul class="nav navbar-nav navbar-left" id="salesrepslist-main"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="siteheader sr-icons">
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Sales Overview</h1>
+                <div class="row">
+                    <h2 id="welcome-nav"></h2>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary sr-icons" id="section_1">
+        <div class="container">
+            <h3 onclick="app.openDetailsModal('sales', 1);">Sales Performance</h3>
+            <div class="row">
+
+                <div class="left-row">
+
+                    <div class="kpi-container" onclick="app.openDetailsModal('sales', 1);">
+                        <div class="graph-kpi-topic neutral">Sales vs Budget %</div>
+                        <div id="KPI01" class="graph-kpi">
+                            <div class="kpi-value"></div>
+                            
+                        </div>
+                        <div class="graph-arrow">→</div>
+                    </div>
+
+                    <div class="kpi-container" onclick="app.openDetailsModal('sales', 2);">
+                        <div class="graph-kpi-topic neutral">Sales $</div>
+                        <div id="KPI02" class="graph-kpi">
+                            <div class="kpi-value"></div>
+                            
+                        </div>
+                        <div class="graph-arrow">→</div>
+                    </div>
+
+                </div>
+
+                <div class="right-row">
+                    
+                     <div class="kpi-container" onclick="app.openDetailsModal('sales', 3);">
+                        <div class="graph-kpi-topic neutral">TY vs LY Sales</div>
+                        <div id="KPI03" class="graph-kpi">
+                            <div class="kpi-value"></div>
+                           
+                        </div>
+                        <div class="graph-arrow">→</div>
+                    </div>
+
+                    <div class="kpi-container" onclick="app.openDetailsModal('sales', 4);">
+                        <div class="graph-kpi-topic neutral">Margin %</div>
+                        <div id="KPI04" class="graph-kpi">
+                            <div class="kpi-value"></div>
+                           
+                        </div>
+                        <div class="graph-arrow">→</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-secondary sr-icons" id="section_2">
+        <div class="container">
+            <h3 onclick="app.openDetailsModal('shipments', 1);">Orders and Customers</h3>
+            <div class="row">
+
+                <div class="left-row">
+
+                    <div class="kpi-container" onclick="app.openDetailsModal('shipments', 1);">
+                        <div class="graph-kpi-topic neutral">Total Shipments</div>
+                        <div id="KPI05" class="graph-kpi">
+                            <div class="kpi-value"></div>
+                           
+                        </div>
+                        <div class="graph-arrow">→</div>
+                    </div>
+
+                </div>
+                <div class="right-row">
+
+                    <div class="kpi-container" onclick="app.openDetailsModal('shipments', 2);">
+                        <div class="graph-kpi-topic neutral">New Customers</div>
+                        <div id="KPI06" class="graph-kpi">
+                            <div class="kpi-value"></div>
+                            
+                        </div>
+                        <div class="graph-arrow">→</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="./Scripts/jquery.js"></script>
+    <script src="./Scripts/bootstrap.js"></script>
+    <script src="./Scripts/scrollreveal.js"></script>
+    <script src="./Scripts/jquery.magnific-popup.js"></script>
+    <script src="./Scripts/creative.js"></script>
+
+    <script src="http://localhost:4848/resources/assets/external/requirejs/require.js"></script>
+    <script src="./Scripts/qlik.js"></script>
+
+    <!-- Modal fullscreen -->
+    <div class="modal modal-fullscreen fade" id="modal-landscape" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                   
+                    <a class="navbar-brand-details" href="#" onclick="app.update();" data-toggle="collapse" data-target="#tablefilters"><span class="glyphicon glyphicon-filter"></span></a>
+                    <a class="navbar-brand-details tablet-hidden" href="#"><span class="glyphicon glyphicon-user" data-toggle="collapse" data-target="#salesreps-table"></span></a>
+
+                    <p class="details-navigation" onclick="app.toggleTableModal('close');">← Back</p>
+                    <p class="nav-selections" id="table-info"></p>
+
+                    <div class="filters collapse" id="tablefilters">
+                        <h3>Filters</h3>
+                        <ul class="nav navbar-nav navbar-left tablet-hidden">
+                            <li><a onclick="app.clearSelections();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear Selections</a></li>
+                        </ul>
+                        <div id="TFB" class="graph-div-container-fb phone-hidden"></div>
+                        <div id="TFF01" class="graph-div-container-filters"></div>
+                        <ul class="nav navbar-nav phone-hidden">
+                            <li><a onclick="app.clearSelections();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear Selections to Scenario Defaults</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="salesreps-table">
+                        <h3>Sales Reps</h3>
+                        <ul class="nav navbar-nav navbar-left" id="salesrepslist-table"></ul>
+                    </div>
+
+                    <h3 class="details-modal-header" id="details-modal-header">Table View</h3>
+                    <table class="landscape-table">
+                        <tr>
+                            <th class="empty"></th>
+                            <th colspan="4">Value</th>
+                        </tr>
+                        <tr class="landscape-header">
+                            <td class="left blue">Sales Performance</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Sales vs Budget %</td>
+                            <td id="TKPI01_1"></td>
+                        </tr>
+
+                         <tr>
+                            <td class="left">Sales $</td>
+                            <td id="TKPI02_1"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="left">TY vs LY Sales</td>
+                            <td id="TKPI03_1"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="left">Margin %</td>
+                            <td id="TKPI04_1"></td>
+                        </tr>
+
+                        <tr class="landscape-header">
+                            <td class="left blue">Orders and Customers</td>
+                            <td></td>
+                        </tr>
+
+                       <tr>
+                            <td class="left">Total Shipments</td>
+                            <td id="TKPI05_1"></td>
+                        </tr>
+
+                         <tr>
+                            <td class="left">% On Time Shipments</td>
+                            <td id="TKPI06_1"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="left">New Customers</td>
+                            <td id="TKPI07_1"></td>
+                        </tr>
+
+                         <tr>
+                            <td class="left">Lost Customers</td>
+                            <td id="TKPI08_1"></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal fullscreen -->
+    <div class="modal modal-fullscreen details fade" id="modal-details" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+             
+                    <a class="navbar-brand-details" href="#" onclick="app.update();" data-toggle="collapse" data-target="#detailsfilters"><span class="glyphicon glyphicon-filter"></span></a>
+                    <a class="navbar-brand-details tablet-hidden" href="#"><span class="glyphicon glyphicon-user" data-toggle="collapse" data-target="#salesreps-details"></span></a>
+                    <p class="details-navigation" onclick="app.closeDetailsModal();">← Back to Dashboard</p>
+                    <p class="nav-selections" id="details-info"></p>
+
+                    <div class="filters collapse" id="detailsfilters">
+                        <h3>Filters</h3>
+                        <ul class="nav navbar-nav navbar-left tablet-hidden">
+                            <li><a onclick="app.clearSelections();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear Selections</a></li>
+                        </ul>
+                        <div id="DFB" class="graph-div-container-fb phone-hidden"></div>
+                        <div id="DFF01" class="graph-div-container-filters"></div>
+                        <ul class="nav navbar-nav phone-hidden">
+                            <li><a onclick="app.clearSelections();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear Selections to Scenario Defaults</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="salesreps-details">
+                        <h3>Sales Reps</h3>
+                        <ul class="nav navbar-nav navbar-left" id="salesrepslist-details"></ul>
+                    </div>
+
+                    <div id="details-modal-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
