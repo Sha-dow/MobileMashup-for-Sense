@@ -1,4 +1,4 @@
-﻿var server = {
+var server = {
     config: {
         host: 'localhost',
         prefix: '/',
@@ -111,7 +111,7 @@
         server.init();
         console.log('Successfully connected!');
 
-        require(["qlik"], function (qlik) {
+        require(["js/qlik"], function (qlik) {
             server.obj.qlik = qlik;
             qlik.setOnError(function (error) {
                 alert(error.message);
