@@ -1,4 +1,4 @@
-var server = {
+﻿var server = {
     config: {
         host: 'localhost',
         prefix: '/',
