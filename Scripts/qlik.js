@@ -568,7 +568,8 @@ var server = {
         }, 500);
     },
     toggleTableModal: function (operation) {
-       
+        //jQuery.noConflict();
+
         $('#modal-landscape').modal({
             backdrop: 'static',
             keyboard: false
@@ -677,7 +678,8 @@ var server = {
         }
     },
     openDetailsModal: function (name, kpi) {
-       
+        //jQuery.noConflict();
+
         $('#modal-details').modal({
             backdrop: 'static',
             keyboard: false
@@ -689,6 +691,7 @@ var server = {
         server.update();
     },
     closeDetailsModal: function () {
+        //jQuery.noConflict();
         $('#modal-details').modal('hide');
     },
     selectPeriod: function(period) {
